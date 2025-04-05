@@ -11,6 +11,16 @@ let rec sumOfDigits n =
      else
          (n % 10) + sumOfDigits (n / 10) 
 
+let digitSum2 n = 
+     let rec sumCifr1 n curSum = 
+         if n = 0 then curSum
+         else
+             let n1 = n/10
+             let cifr = n%10
+             let newSum = curSum + cifr
+             sumCifr1 n1 newSum
+     sumCifr1 n 0
+
 let rec countDivisors num =
     let rec loop div = 
         match div with
@@ -19,8 +29,6 @@ let rec countDivisors num =
         | _ -> loop (div - 1)  
     loop num
 
-let div = countDivisors 10 
-printfn $"Количество делителей: {div}"
 
 let countDivisorsTail num =
     let rec loop n acc =
@@ -30,14 +38,13 @@ let countDivisorsTail num =
         | _ -> loop (n - 1) acc
     loop num 0
 
-let divTail = countDivisorsTail 10 
-printfn $"Количество делителей: {divTail}"
-
 let SumOrCountDivisors flag num = 
     match flag with 
     | true -> sumOfDigits num
     | false -> countDivisors num
 
-let Sum = SumOrCountDivisors false 10
 
-
+let rec mapDigits num (func: int->int->int) acc =
+    match num with
+    | 0 -> acc
+    | nextNumber -> mapDigits (nextNumber / 10) func (func acc (abs(nextNumber) % 10))
