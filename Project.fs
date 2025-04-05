@@ -102,3 +102,17 @@ let processPrimeNumbers num (func: int->int->int) init  =
 
 let EulerFinder num = 
     processPrimeNumbers num (fun x y -> x + 1) 0
+
+let processPrimeNumbersWithCondition num (func: int->int->int) init (condition: int -> bool)  =
+    let rec processPrimeNumbersLoop num func acc current condition =
+        match current with
+        | 0 -> acc
+        | someth ->
+            let newAcc =
+                let result = gcd num current
+                let flag = condition current
+                match result, flag with
+                | 1, true -> func acc current
+                | _, _ -> acc
+            processPrimeNumbersLoop num func newAcc (current - 1) condition
+    processPrimeNumbersLoop num func init num condition
