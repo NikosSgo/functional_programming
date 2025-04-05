@@ -1,4 +1,4 @@
-﻿﻿open System
+﻿open System
 
 let circleArea r = 
     let pi = 3.14159
@@ -99,3 +99,6 @@ let processPrimeNumbers num (func: int->int->int) init  =
                 | _ -> acc
             processPrimeNumbers num func newAcc (current - 1)
     processPrimeNumbers num func init num
+
+let EulerFinder num = 
+    processPrimeNumbers num (fun x y -> x + 1) 0
