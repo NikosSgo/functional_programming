@@ -1,4 +1,6 @@
-﻿let circleArea r = 
+﻿﻿open System
+
+let circleArea r = 
     let pi = 3.14159
     pi * r * r
  
@@ -65,3 +67,17 @@ let chooseLanguage lang =
     | "Prolog" -> "Ultra podliza"
     | "Ruby" -> "Super nice"
     | someth -> "Nu takoe"
+
+
+
+let chooseLanguageSuperPos () = 
+    Console.Write("Enter your favorite language: ")
+    (Console.ReadLine >> chooseLanguage >> Console.WriteLine)
+
+let chooseLanguageCurry () = 
+    Console.Write("Enter your favorite language: ")
+    let subChooseLanguageCurry reader func writer =
+        let answer = reader()
+        let langResult = func answer
+        writer langResult
+    subChooseLanguageCurry Console.ReadLine chooseLanguage Console.WriteLine
