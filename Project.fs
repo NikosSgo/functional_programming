@@ -48,3 +48,14 @@ let rec mapDigits num (func: int->int->int) acc =
     match num with
     | 0 -> acc
     | nextNumber -> mapDigits (nextNumber / 10) func (func acc (abs(nextNumber) % 10))
+
+
+let rec mapDigitsWithCondition num (func: int->int->int) acc (condition: int->bool) =
+    match num with 
+    | 0 -> acc
+    | nextNumber ->
+        let digit = nextNumber % 10
+        let flag = condition digit
+        match flag with
+        | true -> mapDigitsWithCondition (nextNumber / 10) func (func acc (nextNumber % 10)) condition
+        | false -> mapDigitsWithCondition (nextNumber / 10) func acc condition
