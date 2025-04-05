@@ -116,3 +116,11 @@ let processPrimeNumbersWithCondition num (func: int->int->int) init (condition: 
                 | _, _ -> acc
             processPrimeNumbersLoop num func newAcc (current - 1) condition
     processPrimeNumbersLoop num func init num condition
+
+let countCoprimes n =
+    let rec loop current acc =
+        if current = 0 then acc
+        else
+            let acc' = if gcd n current = 1 then acc + 1 else acc
+            loop (current - 1) acc'
+    loop (n - 1) 0
