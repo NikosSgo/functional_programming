@@ -81,3 +81,21 @@ let chooseLanguageCurry () =
         let langResult = func answer
         writer langResult
     subChooseLanguageCurry Console.ReadLine chooseLanguage Console.WriteLine
+
+let rec gcd x y = 
+   match y with
+   | 0 -> x
+   | someth -> gcd y (x%y)
+
+let processPrimeNumbers num (func: int->int->int) init  =
+    let rec processPrimeNumbers num func acc current =
+        match current with
+        | 0 -> acc
+        | someth ->
+            let newAcc =
+                let result = gcd num current
+                match result with
+                | 1 -> func acc current
+                | _ -> acc
+            processPrimeNumbers num func newAcc (current - 1)
+    processPrimeNumbers num func init num
