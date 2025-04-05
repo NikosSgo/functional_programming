@@ -124,3 +124,12 @@ let countCoprimes n =
             let acc' = if gcd n current = 1 then acc + 1 else acc
             loop (current - 1) acc'
     loop (n - 1) 0
+
+let sumDigitsDivBy3 n =
+    let rec loop num acc =
+        if num = 0 then acc
+        else
+            let digit = abs num % 10
+            let acc' = if digit % 3 = 0 then acc + digit else acc
+            loop (num / 10) acc'
+    loop n 0
