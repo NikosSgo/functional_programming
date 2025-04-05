@@ -49,7 +49,6 @@ let rec mapDigits num (func: int->int->int) acc =
     | 0 -> acc
     | nextNumber -> mapDigits (nextNumber / 10) func (func acc (abs(nextNumber) % 10))
 
-
 let rec mapDigitsWithCondition num (func: int->int->int) acc (condition: int->bool) =
     match num with 
     | 0 -> acc
@@ -59,3 +58,10 @@ let rec mapDigitsWithCondition num (func: int->int->int) acc (condition: int->bo
         match flag with
         | true -> mapDigitsWithCondition (nextNumber / 10) func (func acc (nextNumber % 10)) condition
         | false -> mapDigitsWithCondition (nextNumber / 10) func acc condition
+
+let chooseLanguage lang =
+    match lang with
+    | "F#" -> "Podliza"
+    | "Prolog" -> "Ultra podliza"
+    | "Ruby" -> "Super nice"
+    | someth -> "Nu takoe"
